@@ -1,0 +1,30 @@
+[package]
+name = "bitgolf-core"
+description = "Deterministic byte-level transformer inference, range coding and the .bg container"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[features]
+default = ["parallel"]
+# Multi-threaded block coding. Disabled for wasm32, which has no threads.
+parallel = ["dep:rayon"]
+
+[dependencies]
+crc.workspace = true
+miniz_oxide.workspace = true
+rayon = { workspace = true, optional = true }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+proptest.workspace = true
+rayon.workspace = true
+
+[lints]
+workspace = true

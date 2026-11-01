@@ -1,0 +1,15 @@
+Compression is prediction. A model that guesses the next byte well can store it in
+fewer bits: a range coder spends exactly -log2 p(byte) bits, so a byte the model
+expected with probability 0.9 costs 0.15 bits, and a surprise costs many.
+
+{"id": 1815, "name": "Ada Lovelace", "tags": ["analytical engine", "notes"], "ok": true}
+{"id": 1912, "name": "Alan Turing", "tags": ["computability", "enigma"], "ok": true}
+2025-10-31T17:03:12.481Z INFO  [worker-3] order-service: request completed id=48151 latency_ms=12.4
+2025-10-31T17:03:12.502Z WARN  [worker-1] billing: retrying upstream call id=48152 latency_ms=250.0
+
+fn main() {
+    let total: u64 = (1..=10).map(|n| n * n).sum();
+    println!("sum of squares: {total}");
+}
+
+Unicode survives too: naïve café, Grüße, 東京, emoji 🙂, and maths ∑ x² ≤ ∞.

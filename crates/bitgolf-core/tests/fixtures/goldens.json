@@ -1,0 +1,23 @@
+{
+  "text": "crates/bitgolf-core/tests/fixtures/golden_text.txt",
+  "cases": [
+    {
+      "model": "crates/bitgolf-core/tests/fixtures/tiny.bgm",
+      "block_size": 256,
+      "logits_sha256": "222ae897bcb042fd2d1818661781145d486ed035ac6c36c42afef8dabe5be10a",
+      "container_sha256": "d675cf9080b697b37dd4504acff5b1d507e71c9200629b3515ac6666d844b0b9"
+    },
+    {
+      "model": "models/bitgolf-nano.bgm",
+      "block_size": 512,
+      "logits_sha256": "b5985629b9ae9dcd05db2908094ff424af4875ca067e3d31acb6587bf9448d7c",
+      "container_sha256": "385a1fb79d47b3610038fb412d60856fc55f9e92f152b7250e5f6501c2a43029"
+    },
+    {
+      "model": "models/bitgolf-small.bgm",
+      "block_size": 512,
+      "logits_sha256": "dc911fb8c53380b158e549c4e43a190167fe3b6dc7f3bd7f849e707badf4e8c6",
+      "container_sha256": "6db3378b9a90b95c0174c7ef92eb1a21fb92079260fd4cb5e2807cf209d4f48e"
+    }
+  ]
+}
