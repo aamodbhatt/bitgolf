@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>bitgolf: neural text compression in the browser</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <h1>bitgolf</h1>
+        <p>A tiny transformer predicts every byte; a range coder pays only for surprise.</p>
+      </div>
+      <label class="model">
+        model
+        <select id="model" aria-label="model"></select>
+      </label>
+    </header>
+    <main>
+      <section class="live">
+        <div class="panel-title">
+          <h2>Type anything</h2>
+          <span id="model-info" class="muted">loading...</span>
+        </div>
+        <textarea id="input" spellcheck="false" aria-label="text to score"></textarea>
+        <div class="stats">
+          <div><span id="stat-bytes">0</span><label>bytes</label></div>
+          <div class="hero"><span id="stat-model">-</span><label>bitgolf bits/byte</label></div>
+          <div><span id="stat-gzip">-</span><label>gzip bits/byte</label></div>
+          <div><span id="stat-ratio">-</span><label>smaller than gzip</label></div>
+          <div><span id="stat-ms">-</span><label>model time</label></div>
+        </div>
+        <div class="legend">
+          <span>0 bits</span>
+          <i class="b0"></i><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i>
+          <i class="b5"></i><i class="b6"></i><i class="b7"></i><i class="b8"></i><i class="b9"></i>
+          <span>8+ bits per character</span>
+        </div>
+        <pre id="heatmap" aria-label="per-character cost heatmap"></pre>
+      </section>
+      <section class="files">
+        <h2>Compress a file in your browser</h2>
+        <p class="muted">
+          Text becomes a <code>.bg</code> container; a <code>.bg</code> file is decoded and verified.
+          Files made here decode with the native CLI, and the other way round: inference is
+          bit-exact on wasm32 and x86-64.
+        </p>
+        <div id="drop">
+          <input type="file" id="file" aria-label="file to compress or decompress" />
+          <label>
+            block size
+            <select id="block-size">
+              <option value="16384">16 KiB</option>
+              <option value="65536" selected>64 KiB</option>
+              <option value="262144">256 KiB</option>
+            </select>
+          </label>
+        </div>
+        <p id="file-result" class="muted"></p>
+      </section>
+    </main>
+    <footer class="muted">
+      Runs entirely in this tab (WebAssembly, no server inference).
+      <a href="https://github.com/aamodbhatt/bitgolf">github.com/aamodbhatt/bitgolf</a>
+    </footer>
+    <div id="tip" hidden></div>
+  </body>
+</html>

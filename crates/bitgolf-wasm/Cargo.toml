@@ -1,0 +1,20 @@
+[package]
+name = "bitgolf-wasm"
+description = "WebAssembly bindings for bitgolf"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+bitgolf-core.workspace = true
+serde_json.workspace = true
+wasm-bindgen.workspace = true
+
+[lints]
+workspace = true
