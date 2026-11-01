@@ -1,0 +1,27 @@
+# Build outputs
+/target/
+/dist/
+/build/
+# Python
+.venv/
+__pycache__/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+# Node
+node_modules/
+# Data, runs and checkpoints (produced on the training machine)
+/data/
+/runs/
+/artifacts/
+*.pt
+*.ckpt
+*.log
+.jobs/
+.cache/
+# Scratch outputs
+*.bg
+*.heatmap.html
+# Internal working notes
+/RESUME.md
