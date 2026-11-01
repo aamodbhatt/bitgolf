@@ -1,0 +1,30 @@
+# A one-minute GPU smoke test of the full train -> QAT -> export path.
+[defaults]
+data_dir = "../data/train"
+out_dir = "../runs/smoke"
+seq_len = 1024
+batch_size = 64
+warmup_steps = 20
+weight_decay = 0.1
+eval_every = 100
+eval_batches = 2
+seed = 1234
+device = "cuda"
+compile = true
+mix_prose = 0.70
+mix_code = 0.15
+mix_structured = 0.15
+
+[[run]]
+model = "nano"
+steps = 150
+qat_steps = 50
+lr = 4e-3
+qat_lr = 4e-4
+
+[[run]]
+model = "small"
+steps = 150
+qat_steps = 50
+lr = 2e-3
+qat_lr = 2e-4

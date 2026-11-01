@@ -1,0 +1,30 @@
+# Strong runs on the A40. Step counts fit a 30 GPU-minute budget for both models on a shared A40.
+[defaults]
+data_dir = "../data/train"
+out_dir = "../runs/final"
+seq_len = 1024
+batch_size = 64
+warmup_steps = 200
+weight_decay = 0.1
+eval_every = 500
+eval_batches = 20
+seed = 1234
+device = "cuda"
+compile = true
+mix_prose = 0.70
+mix_code = 0.15
+mix_structured = 0.15
+
+[[run]]
+model = "nano"
+steps = 8000
+qat_steps = 800
+lr = 4e-3
+qat_lr = 4e-4
+
+[[run]]
+model = "small"
+steps = 3600
+qat_steps = 300
+lr = 2e-3
+qat_lr = 2e-4

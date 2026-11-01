@@ -1,0 +1,23 @@
+# CPU-sized run for laptops and CI-like machines: the tiny preset on a small data sample.
+[defaults]
+data_dir = "../data/train"
+out_dir = "../runs/laptop"
+seq_len = 256
+batch_size = 16
+warmup_steps = 20
+weight_decay = 0.1
+eval_every = 100
+eval_batches = 2
+seed = 1234
+device = "cpu"
+compile = false
+mix_prose = 0.70
+mix_code = 0.15
+mix_structured = 0.15
+
+[[run]]
+model = "tiny"
+steps = 300
+qat_steps = 50
+lr = 3e-3
+qat_lr = 3e-4
