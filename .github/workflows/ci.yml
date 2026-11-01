@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - name: Format
+        run: cargo fmt --all --check
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: Tests (unit, property, parity, store crash recovery, native goldens)
+        run: cargo test --workspace
+      - name: Install wasm-bindgen
+        uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-bindgen-cli@0.2.130
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: wasm32 determinism vs native goldens (scalar and SIMD128)
+        run: |
+          OUT=target/pkg bash scripts/build-wasm.sh
+          node crates/bitgolf-wasm/tests/determinism.mjs target/pkg
+          SIMD=1 OUT=target/pkg-simd bash scripts/build-wasm.sh
+          node crates/bitgolf-wasm/tests/determinism.mjs target/pkg-simd
+      - name: CLI smoke test
+        run: |
+          cargo build --release -p bitgolf-cli
+          B=target/release/bitgolf
+          $B compress README.md -o /tmp/r.bg --model nano
+          $B info /tmp/r.bg
+          $B decompress /tmp/r.bg -o /tmp/r.out
+          cmp README.md /tmp/r.out
+          $B cat /tmp/r.bg --block 0 > /dev/null
+
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: training
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install (CPU-only torch)
+        run: |
+          uv venv --python 3.12
+          uv pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+          uv pip install numpy pyarrow huggingface_hub matplotlib pytest mypy ruff
+          uv pip install --no-deps -e .
+      - name: Lint and type-check
+        run: |
+          uv run --no-sync ruff check .
+          uv run --no-sync ruff format --check .
+          uv run --no-sync mypy
+      - name: Tests
+        run: uv run --no-sync pytest -q
