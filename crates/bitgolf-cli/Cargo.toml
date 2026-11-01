@@ -1,0 +1,25 @@
+[package]
+name = "bitgolf-cli"
+description = "Command-line interface for bitgolf"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "bitgolf"
+path = "src/main.rs"
+
+[dependencies]
+bitgolf-core = { workspace = true, features = ["parallel"] }
+anyhow.workspace = true
+clap.workspace = true
+rayon.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tiny_http.workspace = true
+
+[lints]
+workspace = true
