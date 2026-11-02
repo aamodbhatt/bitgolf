@@ -23,5 +23,3 @@ node_modules/
 # Scratch outputs
 *.bg
 *.heatmap.html
-# Internal working notes
-/RESUME.md

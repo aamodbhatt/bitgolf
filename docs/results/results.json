@@ -1,6 +1,5 @@
 {
   "meta": {
-    "host": "1718c62022fa",
     "cpu": "Intel Xeon Gold 6342, 8-vCPU quota on a shared pod",
     "bitgolf_build": "cargo build --release (baseline x86-64, no target-cpu flags)",
     "block_size": 32768

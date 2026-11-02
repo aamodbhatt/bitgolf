@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import platform
 import shutil
 import subprocess
 import tempfile
@@ -225,7 +224,6 @@ def report(rows_path: Path, out: Path, block_size: int) -> None:
     rows = [Row(**json.loads(line)) for line in rows_path.read_text().splitlines() if line]
     out.mkdir(parents=True, exist_ok=True)
     meta = {
-        "host": platform.node(),
         "cpu": "Intel Xeon Gold 6342, 8-vCPU quota on a shared pod",
         "bitgolf_build": "cargo build --release (baseline x86-64, no target-cpu flags)",
         "block_size": block_size,

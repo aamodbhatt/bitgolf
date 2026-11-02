@@ -171,7 +171,7 @@ speeds, is in [docs/results/results.md](docs/results/results.md).*
 
 - bitgolf-small wins clearly on text like its training mix (web prose 40% smaller than brotli,
   source code 33% smaller) and on Wikipedia markup it never saw (14% smaller).
-- The 5.7x larger model buys 5-13% over nano on every text file (alice29 5%, web prose 8%,
+- The 5.6x larger model buys 5-13% over nano on every text file (alice29 5%, web prose 8%,
   enwik8 11%, code 13%). For reference, its validation cross-entropy (PyTorch, int8 simulated)
   is 1.583 bits/byte on the web-prose split and 1.203 on the code split.
 - Both models lose on 19th-century literature, small only narrowly (2.499 vs brotli's 2.445,
